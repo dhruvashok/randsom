@@ -18,7 +18,7 @@ def solve():
     pwn.log.success(f'Got seed: {current_time}')
     nums = gen_rand(current_time) # seed the RNG with the current time and generate the same set of 32 numbers
     flag_enc = bytes.fromhex(flag_enc) # convert the encrypted flag hex to bytes
-    flag = bytes(x ^ y for x, y in zip(flag_enc, nums)) # reverse the XOR to decrypt the flag
+    flag = bytes((x ^ y) % 256 for x, y in zip(flag_enc, nums)) # reverse the XOR to decrypt the flag
     pwn.log.success(f'FLAG: {flag.decode()}')
     r.close()
 
