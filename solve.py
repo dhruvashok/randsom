@@ -8,8 +8,7 @@ def gen_rand(seed):
     return [random.randint(1, 255) for _ in range(32)]
 
 def solve():
-    # r = pwn.process("./randsom.py")
-    r = pwn.remote("4.tcp.ngrok.io", 19031)
+    r = pwn.process("./randsom.py")
     r.recv()
     r.sendline('Y') # ask for an encrypted flag
     flag_enc = r.recv().decode().split("\n")[0].split(": ")[1] # get the encrypted flag
